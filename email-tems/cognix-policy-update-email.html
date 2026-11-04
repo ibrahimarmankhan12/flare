@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>Flare — Policy Update</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #f4f4f0;
+      font-family: 'DM Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      padding: 40px 16px;
+    }
+
+    .wrapper {
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* Top wordmark */
+    .wordmark {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .wordmark span {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: #999;
+      text-transform: uppercase;
+    }
+
+    /* Card */
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #e8e8e4;
+    }
+
+    /* Header strip */
+    .header {
+      background: #0d0d0d;
+      padding: 36px 40px 32px;
+      position: relative;
+    }
+
+    .header-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 12px;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+    }
+
+    .header h1 span {
+      color: #a8ff78;
+    }
+
+    /* Date badge */
+    .date-badge {
+      display: inline-block;
+      margin-top: 16px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: #888;
+      letter-spacing: 0.05em;
+    }
+
+    /* Body */
+    .body {
+      padding: 36px 40px;
+    }
+
+    .greeting {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    /* Changes section */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #bbb;
+      margin-bottom: 14px;
+    }
+
+    .change-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .change-icon {
+      width: 28px;
+      height: 28px;
+      background: #f4f4f0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .change-text strong {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 2px;
+    }
+
+    .change-text p {
+      font-size: 13px;
+      color: #777;
+      line-height: 1.6;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: #f0f0ec;
+      margin: 28px 0;
+    }
+
+    /* Promise box */
+    .promise-box {
+      background: #f9f9f6;
+      border: 1px solid #ebebе7;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 28px;
+    }
+
+    .promise-box p {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .promise-box strong {
+      color: #111;
+    }
+
+    /* CTA Buttons */
+    .cta-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #bbb;
+      margin-bottom: 12px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 11px 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary {
+      background: #0d0d0d;
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      background: #f4f4f0;
+      color: #333;
+      border: 1px solid #e0e0db;
+    }
+
+    /* Consent notice */
+    .consent-notice {
+      font-size: 12px;
+      color: #aaa;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .consent-notice a {
+      color: #888;
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid #f0f0ec;
+      padding: 24px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-left {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: #bbb;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-right {
+      font-size: 12px;
+      color: #bbb;
+    }
+
+    .footer-right a {
+      color: #999;
+      text-decoration: none;
+    }
+
+    /* Bottom note */
+    .bottom-note {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 11.5px;
+      color: #bbb;
+      line-height: 1.6;
+    }
+
+    .bottom-note a {
+      color: #999;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+
+    <!-- Wordmark -->
+    <div class="wordmark">
+      <img src="https://ffeadmntpqppizndcvwf.supabase.co/storage/v1/object/public/flare/uploads/956e5dec-c6ef-4ff4-8424-33656fba5578-Flare_Logo_With_Dark_BG.png" alt="Flare" width="28" height="28" style="display:inline-block; vertical-align:middle; margin-right:8px; border-radius:6px;" />
+      <span>Flare</span>
+    </div>
+
+    <!-- Card -->
+    <div class="card">
+
+      <!-- Header -->
+      <div class="header">
+        <div class="header-label">Policy Update</div>
+        <h1>We've updated our<br/><span>Terms & Privacy Policy.</span></h1>
+        <div class="date-badge">Effective March 5, 2026</div>
+      </div>
+
+      <!-- Body -->
+      <div class="body">
+
+        <p class="greeting">
+          Hi [First Name],<br/><br/>
+          We've rewritten our Terms of Service and Privacy Policy to be clearer, more detailed, and fully transparent about how Flare works and how we handle your data. Here's a quick rundown of what's new.
+        </p>
+
+        <div class="section-label">What changed</div>
+
+        <div class="change-item">
+          <div class="change-icon">🔐</div>
+          <div class="change-text">
+            <strong>Privacy Policy</strong>
+            <p>Full breakdown of every type of data we collect, why we collect it, how long we keep it, and your rights — including GDPR and CCPA.</p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <div class="change-icon">📋</div>
+          <div class="change-text">
+            <strong>Terms of Service</strong>
+            <p>Added detailed sections on data collection, acceptable use, AI-generated content, voice mode, image generation, and content ownership.</p>
+          </div>
+        </div>
+
+        <div class="change-item">
+          <div class="change-icon">🍪</div>
+          <div class="change-text">
+            <strong>Cookies Policy</strong>
+            <p>Published a new, dedicated Cookies Policy covering every cookie we set, why, and how to manage or disable them.</p>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Promise -->
+        <div class="promise-box">
+          <p>Our core principle hasn't changed — <strong>we collect your data only to serve you.</strong> We do not sell it, share it with advertisers, or use it to train AI models without your explicit consent.</p>
+        </div>
+
+        <!-- CTAs -->
+        <div class="cta-label">Read the updated docs</div>
+        <div class="btn-group">
+          <a href="https://www.flareai.co/privacy-policy" class="btn btn-primary">Privacy Policy →</a>
+          <a href="https://www.flareai.co/terms-of-service" class="btn btn-secondary">Terms of Service →</a>
+          <a href="https://www.flareai.co/cookies-policy" class="btn btn-secondary">Cookies Policy →</a>
+        </div>
+
+        <!-- Consent notice -->
+        <p class="consent-notice">
+          By continuing to use Flare after March 5, 2026, you agree to the updated
+          <a href="https://www.flareai.co/terms-of-service">Terms of Service</a> and
+          <a href="https://www.flareai.co/privacy-policy">Privacy Policy</a>.
+          If you do not agree, you may delete your account from your account settings.
+        </p>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <div class="footer-left">flare — 2026</div>
+        <div class="footer-right">
+          Questions? <a href="mailto:support@flareai.in">support@flareai.in</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom note -->
+    <p class="bottom-note">
+      You're receiving this because you have a Flare account.<br/>
+      <a href="#">Unsubscribe</a> · <a href="https://www.flareai.co">flareai.co</a>
+    </p>
+
+  </div>
+
+</body>
+</html>

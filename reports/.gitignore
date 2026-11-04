@@ -1,0 +1,6 @@
+# Generated load-test reports
+# These are baseline captures — check them in to track regressions over time.
+# Add `baseline-*.json` to git if you want to track them; the timestamped ones
+# (per-run) stay ignored.
+load-test-*.json
+!baseline-*.json

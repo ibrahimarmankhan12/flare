@@ -1,0 +1,158 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 40px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-title-main {
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--text-primary);
+}
+
+.header-sep {
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.header-title-sub {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+}
+
+.header-by {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  font-weight: 400;
+}
+
+.header-by-link {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.header-by-link:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-divider {
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+}
+
+/* ── Model button ── */
+.header-model-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 4px 12px;
+  height: 28px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-mono);
+}
+.header-model-btn:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-elevated);
+}
+
+.header-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+.header-status-dot.on {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.header-model-provider {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.06em;
+}
+
+.header-model-sep {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.header-model-name {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.03em;
+}
+
+.header-gear {
+  color: var(--text-muted);
+  transition: color 0.15s;
+  flex-shrink: 0;
+}
+.header-model-btn:hover .header-gear {
+  color: var(--text-secondary);
+}
+
+/* Header actions button */
+.what-is-this-btn {
+  font-size: 10px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--text-muted) !important;
+  padding: 3px 10px !important;
+}
+.what-is-this-btn:hover {
+  color: var(--text-primary) !important;
+}
+
+/* Narrow screens: the wide letter-spacing made the brand wrap to a
+   vertical column. Tighten it and drop the "/ CANVAS" sub-label. */
+@media (max-width: 640px) {
+  .app-header {
+    padding: 0 10px;
+    gap: 8px;
+  }
+
+  .header-title-main {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+
+  .header-title-sub,
+  .header-sep {
+    display: none;
+  }
+}

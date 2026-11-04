@@ -1,0 +1,6 @@
+[build]
+# Use pnpm directly since Corepack already installs it
+buildCommand = "pnpm install --frozen-lockfile && pnpm build"
+
+[deploy]
+startCommand = "pnpm start"

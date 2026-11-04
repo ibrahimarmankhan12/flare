@@ -1,0 +1,51 @@
+{
+  "id": "/",
+  "name": "Flare AI - Advanced AI Chat Assistant",
+  "short_name": "Flare AI",
+  "description": "Your intelligent AI assistant powered by GPT-4, Claude, Gemini & DeepSeek. Experience advanced reasoning, image generation, code assistance, and natural conversations. Free to start.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "any",
+  "scope": "/",
+  "categories": [
+    "productivity",
+    "utilities",
+    "business"
+  ],
+  "lang": "en-US",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/flare-logo-192.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/flare-logo-512.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "New Chat",
+      "short_name": "Chat",
+      "description": "Start a new AI conversation",
+      "url": "/",
+      "icons": [
+        {
+          "src": "/flare-logo-192.webp",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "handle_links": "preferred"
+}

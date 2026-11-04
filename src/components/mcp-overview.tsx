@@ -1,0 +1,204 @@
+"use client";
+import { ArrowUpRight } from "lucide-react";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { MCPIcon } from "ui/mcp-icon";
+
+import { isMaybeStdioConfig } from "lib/ai/mcp/is-mcp-config";
+import { IS_MCP_SERVER_REMOTE_ONLY } from "lib/const";
+import { AsanaIcon } from "ui/asana-icon";
+import { AtlassianIcon } from "ui/atlassian-icon";
+import { Button } from "ui/button";
+import { CanvaIcon } from "ui/canva-icon";
+import { GithubIcon } from "ui/github-icon";
+import { LinearIcon } from "ui/linear-icon";
+import { NeonIcon } from "ui/neon-icon";
+import { NotionIcon } from "ui/notion-icon";
+import { PaypalIcon } from "ui/paypal-icon";
+import { PlaywrightIcon } from "ui/playwright-icon";
+import { StripeIcon } from "ui/stripe-icon";
+
+type RecommendedMcp = {
+  name: string;
+  label: string;
+  config: Record<string, any>;
+  icon: React.ComponentType<any>;
+  runtime: "all" | "self-hosted-only";
+};
+
+export const RECOMMENDED_MCPS = [
+  {
+    name: "github",
+    label: "GitHub",
+    config: {
+      url: "https://api.githubcopilot.com/mcp/",
+      headers: {
+        Authorization: "Bearer YOUR_GITHUB_TOKEN",
+      },
+    },
+    icon: GithubIcon,
+    runtime: "all",
+  },
+  {
+    name: "notion",
+    label: "Notion",
+    config: {
+      url: "https://mcp.notion.com/mcp",
+    },
+    icon: NotionIcon,
+    runtime: "all",
+  },
+
+  {
+    name: "linear",
+    label: "Linear",
+    config: {
+      url: "https://mcp.linear.app/mcp",
+    },
+    icon: LinearIcon,
+    runtime: "all",
+  },
+  {
+    name: "playwright",
+    label: "Playwright",
+    config: {
+      command: "npx",
+      args: ["@playwright/mcp@latest"],
+    },
+    icon: PlaywrightIcon,
+    runtime: "self-hosted-only",
+  },
+  {
+    name: "neon",
+    label: "Neon",
+    config: {
+      url: "https://mcp.neon.tech/mcp",
+    },
+    icon: NeonIcon,
+    runtime: "all",
+  },
+  {
+    name: "paypal",
+    label: "Paypal",
+    config: {
+      url: "https://mcp.paypal.com/mcp",
+    },
+    icon: PaypalIcon,
+    runtime: "all",
+  },
+  {
+    name: "stripe",
+    label: "Stripe",
+    config: {
+      url: "https://mcp.stripe.com",
+    },
+    icon: StripeIcon,
+    runtime: "all",
+  },
+  {
+    name: "canva",
+    label: "Canva",
+    config: {
+      url: "https://mcp.canva.com/mcp",
+    },
+    icon: CanvaIcon,
+    runtime: "all",
+  },
+  {
+    name: "atlassian",
+    label: "Atlassian",
+    icon: AtlassianIcon,
+    config: {
+      url: "https://mcp.atlassian.com/v1/mcp",
+    },
+    runtime: "all",
+  },
+  {
+    name: "asana",
+    label: "Asana",
+    icon: AsanaIcon,
+    config: {
+      url: "https://mcp.asana.com/sse",
+    },
+    runtime: "all",
+  },
+] as const satisfies readonly RecommendedMcp[];
+
+export const getAvailableRecommendedMcps = () =>
+  RECOMMENDED_MCPS.filter((mcp) => {
+    if (!IS_MCP_SERVER_REMOTE_ONLY) return true;
+    return mcp.runtime === "all";
+  });
+
+export const getSelfHostedOnlyRecommendedMcps = () =>
+  RECOMMENDED_MCPS.filter((mcp) => mcp.runtime === "self-hosted-only");
+
+export function MCPOverview() {
+  const t = useTranslations("MCP");
+  const availableMcps = getAvailableRecommendedMcps();
+  const selfHostedMcps = getSelfHostedOnlyRecommendedMcps();
+
+  const handleMcpClick = (
+    e: React.MouseEvent,
+    mcp: (typeof RECOMMENDED_MCPS)[number],
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (
+      IS_MCP_SERVER_REMOTE_ONLY &&
+      (mcp.runtime === "self-hosted-only" || isMaybeStdioConfig(mcp.config))
+    ) {
+      return;
+    }
+
+    const params = new URLSearchParams();
+    params.set("name", mcp.name);
+    params.set("config", JSON.stringify(mcp.config));
+
+    window.location.href = `/mcp/create?${params.toString()}`;
+  };
+
+  return (
+    <div className="flex flex-col gap-4">
+      <Link
+        href="/mcp/create"
+        className="rounded-lg overflow-hidden cursor-pointer p-12 text-center relative group transition-all duration-300 "
+      >
+        <div className="flex flex-col items-center justify-center space-y-4 my-20">
+          <h3 className="text-2xl md:text-4xl font-semibold flex items-center gap-3">
+            <MCPIcon className="fill-foreground size-6 hidden sm:block" />
+            {t("overviewTitle")}
+          </h3>
+
+          <p className="text-muted-foreground max-w-md">
+            {t("overviewDescription")}
+          </p>
+
+          <div className="flex items-center gap-2 text-xl font-bold">
+            {t("addMcpServer")}
+            <ArrowUpRight className="size-6" />
+          </div>
+        </div>
+        <div className="flex gap-2 flex-wrap">
+          {availableMcps.map((mcp) => (
+            <Button
+              key={mcp.name}
+              variant={"secondary"}
+              className="hover:translate-y-[-2px] transition-all duration-300"
+              onClick={(e) => handleMcpClick(e, mcp)}
+            >
+              <mcp.icon />
+              {mcp.label}
+            </Button>
+          ))}
+        </div>
+        {IS_MCP_SERVER_REMOTE_ONLY && selfHostedMcps.length > 0 ? (
+          <p className="text-xs text-muted-foreground mt-3">
+            Self-hosted MCPs (not available on this deployment):{" "}
+            {selfHostedMcps.map((mcp) => mcp.label).join(", ")}
+          </p>
+        ) : null}
+      </Link>
+    </div>
+  );
+}

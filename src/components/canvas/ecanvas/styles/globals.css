@@ -1,0 +1,207 @@
+/* Scoped reset.
+   `:where()` contributes ZERO specificity, so this behaves exactly like the
+   original bare `*` reset it replaces: it still loses to every component
+   class rule. Writing it as a plain `.ecanvas-root *` instead raises the
+   specificity to (0,1,0), which ties with class selectors and — depending on
+   stylesheet order — wipes out their padding (observed: preset chips lost
+   their pill shape, inputs and the header lost all padding). */
+:where(
+    .ecanvas-root,
+    .ecanvas-root *,
+    .ecanvas-root *::before,
+    .ecanvas-root *::after
+  ) {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.ecanvas-root {
+  --bg-primary: #0c0e11;
+  --bg-secondary: #10131a;
+  --bg-tertiary: #161a24;
+  --bg-elevated: #1c2130;
+  --border: #1e2536;
+  --border-hover: #2a3448;
+  --text-primary: #c8cdd8;
+  --text-secondary: #6b7a94;
+  --text-muted: #3d4b63;
+  --accent: #4a9e8e;
+  --accent-hover: #5abfac;
+  --accent-glow: rgba(74, 158, 142, 0.2);
+  --accent-dim: rgba(74, 158, 142, 0.08);
+  --green: #4a9e8e;
+  --green-glow: rgba(74, 158, 142, 0.15);
+  --orange: #c89b4a;
+  --orange-glow: rgba(200, 155, 74, 0.15);
+  --red: #c85a5a;
+  --red-glow: rgba(200, 90, 90, 0.15);
+  --cyan: #5a9ec8;
+  --cyan-glow: rgba(90, 158, 200, 0.15);
+  --scan-color: #4a9e8e;
+  --radius: 4px;
+  --radius-sm: 2px;
+  /* The entire canvas UI is set in this stack. JetBrains Mono / Fira Code /
+     Cascadia Code are developer-installed fonts that the app does not ship,
+     so on a machine without them the chain fell straight through to generic
+     `monospace` and the UI changed shape per-OS. ui-monospace plus the
+     platform defaults give a consistent result everywhere, while still
+     preferring the nicer faces when they are present. */
+  --font-mono: "JetBrains Mono", "SF Mono", "Fira Code", "Cascadia Code",
+    ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
+    "DejaVu Sans Mono", monospace;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Was `body` in the standalone app; scoped so it cannot restyle the
+   rest of the site after a client-side navigation. The viewport layout
+   props it also set (height/overflow/display) are owned by app.css. */
+.ecanvas-root {
+  font-family: var(--font-mono);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+/* Dot grid background */
+.ecanvas-root .dot-grid {
+  background-image: radial-gradient(
+    circle,
+    var(--border) 0.8px,
+    transparent 0.8px
+  );
+  background-size: 16px 16px;
+}
+
+/* ── Scrollbar ── */
+.ecanvas-root ::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.ecanvas-root ::-webkit-scrollbar-track {
+  background: transparent;
+}
+.ecanvas-root ::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+.ecanvas-root ::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
+
+/* ── Shared ── */
+.ecanvas-root .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.12s;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+.ecanvas-root .btn:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+}
+
+.ecanvas-root .btn-primary {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border-color: rgba(74, 158, 142, 0.25);
+}
+.ecanvas-root .btn-primary:hover {
+  background: rgba(74, 158, 142, 0.15);
+  border-color: var(--accent);
+  color: var(--accent-hover);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+.ecanvas-root .btn-primary:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.ecanvas-root .btn-secondary {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.ecanvas-root .btn-secondary:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+.ecanvas-root .btn-ghost {
+  background: none;
+  color: var(--text-muted);
+  border: none;
+  padding: 4px 6px;
+}
+.ecanvas-root .btn-ghost:hover {
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+}
+
+.ecanvas-root .mono {
+  font-family: var(--font-mono);
+}
+
+/* Section label style — like register group headers */
+.ecanvas-root .section-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+.ecanvas-root .section-label::before {
+  content: "●";
+  font-size: 7px;
+}
+
+/* Divider */
+.ecanvas-root .divider {
+  height: 1px;
+  background: var(--border);
+}
+
+@keyframes vc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes vc-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes vc-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}

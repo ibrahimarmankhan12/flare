@@ -1,0 +1,42 @@
+import { selectThreadWithMessagesAction } from "@/app/api/chat/actions";
+import ChatBot from "@/components/chat-bot";
+
+import { ChatMessage, ChatThread } from "app-types/chat";
+import { RedirectType, redirect } from "next/navigation";
+
+const fetchThread = async (
+  threadId: string,
+): Promise<(ChatThread & { messages: ChatMessage[] }) | null> => {
+  return await selectThreadWithMessagesAction(threadId);
+};
+
+export default async function Page({
+  params,
+}: { params: Promise<{ thread: string }> }) {
+  const { thread: threadId } = await params;
+
+  const thread = await fetchThread(threadId);
+
+  if (!thread) redirect("/", RedirectType.replace);
+
+  const initialInsights = thread.summary
+    ? {
+        summary: thread.summary,
+        decisions: thread.decisions ?? [],
+        actionItems: thread.actionItems ?? [],
+        generatedAt:
+          thread.insightsGeneratedAt instanceof Date
+            ? thread.insightsGeneratedAt.toISOString()
+            : (thread.insightsGeneratedAt ?? null),
+      }
+    : null;
+
+  return (
+    <ChatBot
+      threadId={threadId}
+      initialMessages={thread.messages}
+      parentThreadId={thread.parentThreadId ?? null}
+      initialInsights={initialInsights}
+    />
+  );
+}

@@ -1,0 +1,179 @@
+/* ── Layout ── */
+/* The Vite build mounted into #root { height:100vh; display:flex; flex-direction:column }.
+   Inside Next.js there is no #root — the app is dropped into a plain
+   block container, so .workspace{flex:1} had nothing to fill and the
+   Excalidraw surface collapsed to 0px. This restores that context. */
+.ecanvas-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.workspace {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.excalidraw .App-toolbar-content {
+  display: none !important;
+}
+
+.excalidraw .mobile-misc-tools-container {
+  display: none !important;
+}
+
+.sidebar-trigger {
+  display: none !important;
+}
+
+.panel-left {
+  width: 44%;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border);
+  background: var(--bg-secondary);
+}
+
+.panel-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+  position: relative;
+  background-image: radial-gradient(
+    circle,
+    rgba(30, 37, 54, 0.5) 0.8px,
+    transparent 0.8px
+  );
+  background-size: 16px 16px;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  flex-shrink: 0;
+}
+
+.panel-header .section-label {
+  font-size: 10px;
+}
+
+/* ── Preview ── */
+.preview-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 5px 12px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-secondary);
+}
+
+.preview-toolbar-left {
+  display: flex;
+  gap: 4px;
+}
+
+.preview-meta {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Canvas floor ──
+   The prompt bar is effectively fixed height, so on short viewports it
+   was eating the drawing area (300px canvas at 700px tall). Give the
+   sketch surface a floor and let the prompt input shrink instead.
+   Kept modest: the prompt bar carries the primary action (Generate),
+   so it must never be pushed out of the panel to buy canvas space. */
+.canvas-wrapper {
+  min-height: 200px;
+}
+
+@media (max-height: 820px) {
+  .prompt-input {
+    min-height: 56px !important;
+  }
+}
+
+/* ── Responsive ──
+   Upstream vcanvas was a fixed desktop SPA and shipped zero media
+   queries. Side-by-side panels are unusable below ~900px: at 420px the
+   preview collapsed to ~155px of wrapped text and the Excalidraw
+   toolbar was clipped. Stack them instead — sketch on top, output
+   below — which is also the natural order of the workflow.
+   `!important` on width is required because ResizeHandle writes an
+   inline style.width on .panel-left. */
+@media (max-width: 900px) {
+  .workspace {
+    flex-direction: column;
+  }
+
+  .panel-left {
+    width: 100% !important;
+    min-width: 0;
+    /* Takes the remaining height; the preview below is fixed so the
+       prompt bar and Generate button can never be clipped. */
+    flex: 1 1 auto;
+    min-height: 0;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .panel-right {
+    flex: 0 0 180px;
+    min-height: 180px;
+  }
+
+  .canvas-wrapper {
+    min-height: 160px;
+  }
+
+  /* Reclaim ~50px for the sketch area — the preset chips are a
+     convenience, the drawing surface is the point of the screen. */
+  .inspiration-strip {
+    display: none;
+  }
+
+  .prompt-input {
+    min-height: 48px !important;
+    max-height: 96px;
+  }
+
+  /* A horizontal drag handle is meaningless once stacked. */
+  .resize-handle {
+    display: none !important;
+  }
+}

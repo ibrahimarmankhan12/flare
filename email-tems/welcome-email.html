@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Flare — Welcome</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background-color:#f4f6fb;
+  font-family:'DM Sans',sans-serif;
+  padding:40px 16px;
+}
+
+.wrapper { max-width:580px; margin:auto; }
+
+.wordmark {
+  text-align:center;
+  margin-bottom:28px;
+}
+
+.wordmark span {
+  font-family:'DM Mono',monospace;
+  font-size:13px;
+  letter-spacing:0.15em;
+  color:#8a94a6;
+  text-transform:uppercase;
+}
+
+.card {
+  background:#fff;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid #e6ebf5;
+}
+
+/* BLUE HEADER */
+.header {
+  background:#0b1f3a;
+  padding:36px 40px;
+  border-bottom:2px solid #3b82f6;
+}
+
+.header-label {
+  font-family:'DM Mono';
+  font-size:10px;
+  letter-spacing:0.2em;
+  color:#60a5fa;
+  margin-bottom:10px;
+  text-transform:uppercase;
+}
+
+.header h1 {
+  color:#fff;
+  font-size:22px;
+  line-height:1.4;
+}
+
+.header span { color:#60a5fa; }
+
+.body { padding:36px 40px; }
+
+.greeting {
+  font-size:15px;
+  color:#444;
+  line-height:1.7;
+  margin-bottom:24px;
+}
+
+/* INFO BOX */
+.info-box {
+  background:#f2f7ff;
+  border:1px solid #dbeafe;
+  border-radius:10px;
+  padding:16px;
+  margin-bottom:24px;
+  font-size:13px;
+  color:#1e3a8a;
+}
+
+/* FEATURES */
+.section-label {
+  font-family:'DM Mono';
+  font-size:10px;
+  color:#a0aec0;
+  letter-spacing:0.18em;
+  margin-bottom:14px;
+  text-transform:uppercase;
+}
+
+.feature {
+  display:flex;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.icon {
+  width:26px;
+  height:26px;
+  background:#eef4ff;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.text strong {
+  font-size:13.5px;
+  color:#111;
+}
+
+.text p {
+  font-size:13px;
+  color:#666;
+}
+
+/* CTA */
+.btn {
+  display:inline-block;
+  padding:12px 20px;
+  border-radius:8px;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:500;
+}
+
+.btn-primary {
+  background:#2563eb;
+  color:#fff;
+}
+
+.btn-secondary {
+  background:#f4f4f0;
+  border:1px solid #ddd;
+  color:#333;
+  margin-left:8px;
+}
+
+.footer {
+  border-top:1px solid #f0f0ec;
+  padding:24px 40px;
+  font-size:12px;
+  color:#aaa;
+}
+
+.bottom-note {
+  text-align:center;
+  margin-top:20px;
+  font-size:11px;
+  color:#bbb;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <!-- Logo -->
+  <div class="wordmark">
+    <img src="https://ffeadmntpqppizndcvwf.supabase.co/storage/v1/object/public/flare/uploads/956e5dec-c6ef-4ff4-8424-33656fba5578-Flare_Logo_With_Dark_BG.png" width="28" style="margin-right:8px; vertical-align:middle; border-radius:6px;">
+    <span>Flare</span>
+  </div>
+
+  <div class="card">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-label">Welcome</div>
+      <h1>Welcome to <span>Flare</span>,<br/>[First Name].</h1>
+    </div>
+
+    <!-- Body -->
+    <div class="body">
+
+      <p class="greeting">
+        Your account has been successfully created. You’re now ready to explore everything Flare has to offer.
+      </p>
+
+      <div class="info-box">
+        <strong>Email:</strong> [user email]<br/>
+        <strong>Region:</strong> [region]<br/>
+        <strong>Device:</strong> [device]
+      </div>
+
+      <div class="section-label">What you can do</div>
+
+      <div class="feature">
+        <div class="icon">🤖</div>
+        <div class="text">
+          <strong>Chat with AI</strong>
+          <p>Ask questions, generate content, and solve problems instantly.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="icon">💻</div>
+        <div class="text">
+          <strong>Code & Build</strong>
+          <p>Write, debug, and optimize code using powerful AI models.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="icon">🎨</div>
+        <div class="text">
+          <strong>Create Images</strong>
+          <p>Generate visuals and edit images with AI tools.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="icon">🎙️</div>
+        <div class="text">
+          <strong>Voice Interaction</strong>
+          <p>Talk naturally with AI using voice mode.</p>
+        </div>
+      </div>
+
+      <p style="font-size:13px; color:#666; margin-top:20px;">
+        Start exploring and build something amazing with Flare.
+      </p>
+
+      <!-- CTA -->
+      <a href="https://www.flareai.co" class="btn btn-primary">Start Using Flare →</a>
+      <a href="https://www.flareai.co/docs" class="btn btn-secondary">View Docs</a>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      flare — 2026<br/>
+      Need help? support@flareai.in
+    </div>
+
+  </div>
+
+  <div class="bottom-note">
+    You're receiving this because you signed up for Flare.
+  </div>
+
+</div>
+
+</body>
+</html>

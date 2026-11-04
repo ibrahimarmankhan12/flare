@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc --noEmit --pretty)",
+      "Bash(grep -E \"\\\\.\\(ts|tsx\\)$\")",
+      "Bash(grep -n \"exec\\\\|spawn\\\\|eval\\\\|Function\" /d/github/Flare/src/lib/ai/mcp/*.ts)"
+    ]
+  }
+}

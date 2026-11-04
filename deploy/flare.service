@@ -1,0 +1,38 @@
+[Unit]
+Description=Flare Next.js app (production)
+Documentation=https://github.com/flare/zip-main
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=flare
+Group=flare
+WorkingDirectory=/home/flare/zip-main
+# Strong secrets (BETTER_AUTH_SECRET, CHAT_REQUEST_GUARD_SECRET) live in
+# /etc/default/flare (root:flare 0640). Loading them via EnvironmentFile=
+# rather than embedding them in the unit keeps them out of `systemctl cat
+# flare` (which is world-readable for any user on the box).
+EnvironmentFile=/etc/default/flare
+Environment=NODE_ENV=production
+Environment=PORT=3000
+# systemd does NOT honor nvm's shell init files, so without this override
+# `env node` (used by the pnpm shebang) resolves to /usr/bin/node (v20) and
+# pnpm dies with "No such built-in module: node:sqlite". Force the nvm
+# Node 26.3.1 to the front of PATH so pnpm boots on the right interpreter.
+Environment=PATH=/home/flare/.nvm/versions/node/v26.3.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStart=/home/flare/.nvm/versions/node/v26.3.1/bin/pnpm start
+Restart=always
+RestartSec=3
+TimeoutStopSec=20
+
+# Resource limits
+LimitNOFILE=65536
+MemoryMax=2G
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

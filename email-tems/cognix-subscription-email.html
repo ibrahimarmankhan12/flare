@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Flare — Subscription Activated</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background-color: #f4f4f0;
+  font-family: 'DM Sans', sans-serif;
+  padding: 40px 16px;
+}
+
+.wrapper { max-width: 580px; margin: auto; }
+
+.wordmark {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.wordmark span {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: #999;
+  text-transform: uppercase;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #e8e8e4;
+}
+
+.header {
+  background: #0d0d0d;
+  padding: 36px 40px;
+}
+
+.header-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: #666;
+  margin-bottom: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  color: #fff;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.header span { color: #a8ff78; }
+
+.body { padding: 36px 40px; }
+
+.greeting {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: #bbb;
+  margin-bottom: 14px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.change-item {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.change-icon {
+  width: 28px;
+  height: 28px;
+  background: #f4f4f0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.change-text strong {
+  font-size: 13.5px;
+  color: #111;
+}
+
+.change-text p {
+  font-size: 13px;
+  color: #777;
+  line-height: 1.6;
+}
+
+.divider {
+  height: 1px;
+  background: #f0f0ec;
+  margin: 28px 0;
+}
+
+.promise-box {
+  background: #f9f9f6;
+  border: 1px solid #ebebe7;
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+
+.promise-box p {
+  font-size: 13.5px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.plan-info {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 11px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background: #0d0d0d;
+  color: #fff;
+}
+
+.footer {
+  border-top: 1px solid #f0f0ec;
+  padding: 24px 40px;
+  font-size: 12px;
+  color: #bbb;
+}
+
+.bottom-note {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 11px;
+  color: #bbb;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <!-- Logo -->
+  <div class="wordmark">
+    <img src="https://ffeadmntpqppizndcvwf.supabase.co/storage/v1/object/public/flare/uploads/956e5dec-c6ef-4ff4-8424-33656fba5578-Flare_Logo_With_Dark_BG.png" width="28" style="margin-right:8px; vertical-align:middle; border-radius:6px;">
+    <span>Flare</span>
+  </div>
+
+  <div class="card">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-label">Subscription Activated</div>
+      <h1>Your <span>[plan_name]</span> plan<br/>is now active.</h1>
+    </div>
+
+    <!-- Body -->
+    <div class="body">
+
+      <p class="greeting">
+        Hi [First Name],<br/><br/>
+        Your <strong>[plan_name]</strong> subscription is now active. Your account has been successfully upgraded and you now have access to a more powerful Flare experience.
+      </p>
+
+      <div class="plan-info">
+        Plan: <strong>[plan_name]</strong>
+      </div>
+
+      <div class="section-label">What’s unlocked with [plan_name]</div>
+
+      <div class="change-item">
+        <div class="change-icon">🚀</div>
+        <div class="change-text">
+          <strong>Advanced AI Access</strong>
+          <p>Use more powerful models for deeper reasoning and better outputs.</p>
+        </div>
+      </div>
+
+      <div class="change-item">
+        <div class="change-icon">⚡</div>
+        <div class="change-text">
+          <strong>Faster Performance</strong>
+          <p>Priority processing enabled under your <strong>[plan_name]</strong> plan.</p>
+        </div>
+      </div>
+
+      <div class="change-item">
+        <div class="change-icon">🧠</div>
+        <div class="change-text">
+          <strong>Higher Limits</strong>
+          <p>Expanded usage limits included in your <strong>[plan_name]</strong> subscription.</p>
+        </div>
+      </div>
+
+      <div class="change-item">
+        <div class="change-icon">🎙️</div>
+        <div class="change-text">
+          <strong>Premium Features</strong>
+          <p>Voice mode, image tools, and advanced workflows are now unlocked.</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="promise-box">
+        <p>
+          Your <strong>[plan_name]</strong> plan is now active and ready to use. Start exploring everything Flare has to offer.
+        </p>
+      </div>
+
+      <a href="https://www.flareai.co" class="btn btn-primary">Open Flare →</a>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      flare — 2026<br/>
+      Need help? support@flareai.in
+    </div>
+
+  </div>
+
+  <div class="bottom-note">
+    You’re receiving this because your Flare subscription was activated.
+  </div>
+
+</div>
+
+</body>
+</html>
